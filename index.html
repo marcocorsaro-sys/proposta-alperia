@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAKALA x ALPERIA - Proposta di Collaborazione Strategica</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root{--jakala-dark:#1a1a2e;--jakala-blue:#0f3460;--jakala-accent:#e94560;--jakala-light:#f8f9fa;--alperia-green:#00a650;--alperia-dark:#004d2b;--text-primary:#2d2d2d;--text-secondary:#6b7280;--border-light:#e5e7eb;--card-shadow:0 4px 24px rgba(0,0,0,0.06);--gradient-hero:linear-gradient(135deg,#1a1a2e 0%,#0f3460 50%,#004d2b 100%)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f0f2f5;color:var(--text-primary);line-height:1.7;-webkit-font-smoothing:antialiased}
+#password-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--gradient-hero);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease}
+#password-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.password-box{background:rgba(255,255,255,.08);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:48px 40px;width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.password-box .logo-text{font-size:14px;font-weight:600;letter-spacing:6px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:8px}
+.password-box h2{font-size:28px;font-weight:700;color:#fff;margin-bottom:6px}
+.password-box .subtitle{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px}
+.password-box input{width:100%;padding:14px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:all .3s;text-align:center;letter-spacing:2px}
+.password-box input::placeholder{color:rgba(255,255,255,.3);letter-spacing:1px}
+.password-box input:focus{border-color:var(--alperia-green);background:rgba(255,255,255,.1)}
+.password-box button{margin-top:16px;width:100%;padding:14px;background:var(--alperia-green);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+.password-box button:hover{background:#00b85e;transform:translateY(-1px)}
+.password-box .error{color:var(--jakala-accent);font-size:13px;margin-top:12px;display:none}
+#content{display:none}#content.visible{display:block}
+.hero{background:var(--gradient-hero);padding:80px 0 60px;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(0,166,80,.08) 0%,transparent 70%)}
+.hero-inner{max-width:1000px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-badges{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+.hero-badge{padding:6px 16px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.badge-jakala{background:rgba(233,69,96,.15);color:var(--jakala-accent);border:1px solid rgba(233,69,96,.25)}
+.badge-confidential{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12)}
+.hero h1{font-size:42px;font-weight:800;line-height:1.15;margin-bottom:12px;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,.7) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .hero-subtitle{font-size:20px;font-weight:300;color:rgba(255,255,255,.6);margin-bottom:40px}
+.hero-meta{display:flex;gap:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.hero-meta-item .label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.hero-meta-item .value{font-size:14px;font-weight:500;color:rgba(255,255,255,.85)}
+.nav-bar{background:#fff;border-bottom:1px solid var(--border-light);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.nav-inner{max-width:1000px;margin:0 auto;padding:0 40px;display:flex;overflow-x:auto;gap:0}
+.nav-inner a{padding:16px 20px;font-size:13px;font-weight:500;color:var(--text-secondary);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
+.nav-inner a:hover{color:var(--jakala-blue);border-bottom-color:var(--jakala-blue)}
+.main{max-width:1000px;margin:0 auto;padding:40px 40px 80px}
+.section{background:#fff;border-radius:16px;box-shadow:var(--card-shadow);padding:48px;margin-bottom:32px;border:1px solid var(--border-light)}
+.section-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--jakala-accent);margin-bottom:12px}
+.section h2{font-size:28px;font-weight:700;color:var(--jakala-dark);margin-bottom:24px;line-height:1.3}
+.section h3{font-size:20px;font-weight:700;color:var(--jakala-blue);margin:32px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border-light)}
+.section h4{font-size:16px;font-weight:700;color:var(--text-primary);margin:24px 0 12px}
+.section p{margin-bottom:16px;color:var(--text-primary);font-size:15px}
+.section ul,.section ol{margin:12px 0 20px 20px}
+.section li{margin-bottom:8px;font-size:15px;color:var(--text-primary)}
+.section li strong{color:var(--jakala-dark)}
+.highlight-box{background:linear-gradient(135deg,#f0f9ff 0%,#f0fdf4 100%);border-left:4px solid var(--alperia-green);border-radius:0 12px 12px 0;padding:24px 28px;margin:24px 0}
+.highlight-box p{margin:0;font-size:15px}
+.highlight-box strong{color:var(--alperia-dark)}
+.accent-box{background:linear-gradient(135deg,#fff5f7 0%,#fef3f2 100%);border-left:4px solid var(--jakala-accent);border-radius:0 12px 12px 0;padding:24px 28px;margin:24px 0}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:20px 0;border-radius:12px;overflow:hidden;border:1px solid var(--border-light)}
+thead th{background:var(--jakala-dark);color:#fff;padding:14px 20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-align:left}
+tbody td{padding:14px 20px;font-size:14px;border-bottom:1px solid var(--border-light)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:#f9fafb}
+tbody tr:hover{background:#f0f9ff}
+.total-row{background:linear-gradient(135deg,#f0fdf4,#ecfdf5)!important;font-weight:700}
+.total-row td{color:var(--alperia-dark);font-size:15px}
+.pillar-card{border:1px solid var(--border-light);border-radius:16px;padding:32px;margin:24px 0;transition:all .3s;position:relative;overflow:hidden}
+.pillar-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.pillar-1::before{background:var(--jakala-blue)}.pillar-2::before{background:var(--alperia-green)}.pillar-3::before{background:var(--jakala-accent)}
+.pillar-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-2px)}
+.pillar-number{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;border-radius:8px;font-size:14px;font-weight:700;color:#fff;margin-bottom:12px}
+.pillar-1 .pillar-number{background:var(--jakala-blue)}.pillar-2 .pillar-number{background:var(--alperia-green)}.pillar-3 .pillar-number{background:var(--jakala-accent)}
+.pillar-card h4{margin-top:0;border:none;padding:0}
+.phase-card{border:1px solid var(--border-light);border-radius:12px;padding:28px;margin:20px 0;background:linear-gradient(135deg,#fafafa,#fff)}
+.phase-badge{display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1px;background:var(--jakala-dark);color:#fff;margin-bottom:12px}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.kpi-card{background:linear-gradient(135deg,#f8f9fa,#fff);border:1px solid var(--border-light);border-radius:12px;padding:24px;text-align:center}
+.kpi-card .kpi-value{font-size:36px;font-weight:800;color:var(--jakala-dark)}
+.kpi-card .kpi-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.kpi-card .kpi-desc{font-size:13px;color:var(--text-secondary);margin-top:8px;line-height:1.5}
+.investment-total{background:var(--gradient-hero);border-radius:16px;padding:40px;text-align:center;color:#fff;margin:32px 0}
+.investment-total .amount{font-size:48px;font-weight:800}
+.investment-total .label{font-size:14px;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:8px}
+.footer{text-align:center;padding:40px;color:var(--text-secondary);font-size:13px}
+.footer .brand{font-weight:700;color:var(--jakala-dark);font-size:14px;letter-spacing:2px;margin-bottom:8px}
+@media(max-width:768px){.hero h1{font-size:28px}.hero-meta{flex-direction:column;gap:16px}.section{padding:28px 24px}.kpi-grid{grid-template-columns:1fr}.main{padding:20px 16px 60px}}
+</style>
+</head>
+<body>
+<div id="password-screen">
+<div class="password-box">
+<div class="logo-text">JAKALA</div>
+<h2>Documento Riservato</h2>
+<p class="subtitle">Proposta per Alperia SpA</p>
+<input type="password" id="pwd-input" placeholder="Inserisci la password" onkeypress="if(event.key==='Enter')checkPassword()">
+<button onclick="checkPassword()">Accedi</button>
+<p class="error" id="pwd-error">Password non corretta. Riprova.</p>
+</div></div>
+<div id="content">
+<div class="hero"><div class="hero-inner">
+<div class="hero-badges"><span class="hero-badge badge-jakala">JAKALA</span><span class="hero-badge badge-confidential">Confidenziale</span></div>
+<h1>Proposta di<br>Collaborazione Strategica</h1>
+<p class="hero-subtitle">JAKALA &times; ALPERIA</p>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="label">Preparato per</div><div class="value">Alperia SpA &mdash; Bolzano</div></div>
+<div class="hero-meta-item"><div class="label">Data</div><div class="value">Marzo 2026</div></div>
+<div class="hero-meta-item"><div class="label">Investimento Totale</div><div class="value">&euro;77.000</div></div>
+</div></div></div>
+<div class="nav-bar"><div class="nav-inner">
+<a href="#executive">Executive Summary</a><a href="#contesto">Contesto</a><a href="#stream1">Stream 1</a><a href="#stream2">Stream 2</a><a href="#governance">Governance</a><a href="#investment">Investment</a><a href="#jakala">JAKALA</a>
+</div></div>
+<div class="main">
+<div class="section" id="executive">
+<div class="section-label">Sezione 01</div>
+<h2>Executive Summary</h2>
+<p>Alperia si trova oggi in una posizione di leadership energetica nel territorio altoatesino, con un fatturato di &euro;2,28 miliardi, oltre 300 punti di ricarica Neogy e un portafoglio 100% green che la rende un punto di riferimento nella transizione energetica italiana.</p>
+<div class="highlight-box"><p><strong>La rivoluzione della ricerca AI.</strong> Google AI Overview, i Large Language Models (ChatGPT, Gemini, Claude, Perplexity, Grok) e le nuove modalit&agrave; di ricerca conversazionale stanno progressivamente disintermediando il traffico organico tradizionale. Per un player come Alperia, la capacit&agrave; di essere correttamente rappresentati nelle risposte generate dall'AI &egrave; una priorit&agrave; strategica immediata.</p></div>
+<div class="accent-box"><p><strong>La centralit&agrave; del dato CRM.</strong> In un mercato energetico sempre pi&ugrave; competitivo e con margini in compressione, la capacit&agrave; di comprendere profondamente le proprie personas, prevenire il churn e costruire meccaniche di retention evolute rappresenta il secondo asse di vantaggio competitivo sostenibile.</p></div>
+<p>JAKALA propone due stream progettuali complementari che affrontano entrambe queste sfide con un approccio data-driven, proprietario e immediatamente azionabile.</p>
+</div>
+<div class="section" id="contesto">
+<div class="section-label">Sezione 02</div>
+<h2>Contesto Strategico: La Trasformazione della Ricerca AI</h2>
+<h3>Il Nuovo Paradigma</h3>
+<p>Il 2025-2026 segna un punto di svolta irreversibile nel modo in cui gli utenti accedono all'informazione:</p>
+<ul>
+<li><strong>Google AI Overview</strong> &egrave; ora attivo su oltre il 40% delle query informazionali nei mercati europei</li>
+<li><strong>Le ricerche conversazionali</strong> su ChatGPT, Gemini, Perplexity, Claude e Grok stanno generando un nuovo canale di scoperta che bypassa le SERP tradizionali</li>
+<li>Il <strong>traffico diretto &ldquo;dark&rdquo;</strong> sta crescendo del 15-25% YoY per i brand B2C con forte componente informazionale</li>
+</ul>
+<h3>L'Impatto su Alperia</h3>
+<ul>
+<li><strong>Acquisizione clienti B2C:</strong> le query su &ldquo;fornitore energia verde Alto Adige&rdquo; sono sempre pi&ugrave; intercettate dalle AI Overview</li>
+<li><strong>Brand authority:</strong> la strutturazione dei dati di alperia.eu determina come i LLM raccomandano Alperia</li>
+<li><strong>Competitive intelligence:</strong> comprendere come i competitor vengono rappresentati nelle risposte AI</li>
+</ul>
+</div><div class="section" id="stream1">
+<div class="section-label">Stream 01</div>
+<h2>JHorizon: AI Search Intelligence &amp; Activation</h2>
+<h3>Panoramica della Soluzione</h3>
+<p><strong>JHorizon</strong> &egrave; la piattaforma proprietaria JAKALA di AI Search Analytics, progettata per fornire alle aziende una visione completa e azionabile della propria presenza nell'ecosistema delle ricerche AI-driven.</p>
+<h3>Architettura della Piattaforma</h3>
+<h4>Data Integration Layer</h4>
+<ul><li><strong>Google Search Console</strong> &mdash; query, impression, CTR e posizionamento organico</li>
+<li><strong>Google Analytics 4</strong> &mdash; traffico, conversioni e &ldquo;dark AI traffic&rdquo; via reverse engineering proprietario</li></ul>
+<h4>AI Monitoring Engine</h4>
+<table><thead><tr><th>Dimensione</th><th>Perimetro</th></tr></thead>
+<tbody>
+<tr><td><strong>Personas</strong></td><td>3 profili utente rappresentativi (clienti residenziali, business, prospect e-mobility)</td></tr>
+<tr><td><strong>Competitor</strong></td><td>Set competitivo definito in fase di set-up</td></tr>
+<tr><td><strong>Structured Queries</strong></td><td>50 query strategiche x 7 modelli = <strong>350 data point per ciclo</strong></td></tr>
+<tr><td><strong>Modelli AI</strong></td><td>GPT, Gemini, Grok, Claude, Google AI Overview, Gemini Overview, Perplexity</td></tr>
+</tbody></table>
+<div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-value">0-100</div><div class="kpi-label">AI Health Score</div><div class="kpi-desc">Presence Rate, Accuracy, Sentiment, Competitive Share, Citation Quality</div></div>
+<div class="kpi-card"><div class="kpi-value">ATC %</div><div class="kpi-label">AI Traffic Contribution</div><div class="kpi-desc">Reverse engineering proprietario del traffico Direct da GA4 originato da AI</div></div>
+</div>
+<h3>I Tre Pillar</h3>
+<div class="pillar-card pillar-1"><div class="pillar-number">1</div><h4>Technical Structured Data Optimization</h4>
+<p>Audit completo schema.org di alperia.eu + roadmap implementazione (Organization, Product/Service, FAQ, LocalBusiness Neogy, Event).</p></div>
+<div class="pillar-card pillar-2"><div class="pillar-number">2</div><h4>Content Strategy per AI Visibility</h4>
+<p>FAQ Hub strutturato per topic cluster, contenuti AI-first, Entity Building, Topical Authority su transizione energetica, e-mobility, green hydrogen.</p></div>
+<div class="pillar-card pillar-3"><div class="pillar-number">3</div><h4>Digital PR, Advertorial &amp; Link Building</h4>
+<p>Digital PR strategica, advertorial su media autorevoli, link building qualitativa (EURAC, UniBZ), reputation management AI.</p></div>
+<h3>Investment &mdash; Stream 1</h3>
+<table><thead><tr><th>Voce</th><th style="text-align:right">Importo</th></tr></thead>
+<tbody>
+<tr><td>Set-Up piattaforma JHorizon (una tantum)</td><td style="text-align:right">&euro;5.000</td></tr>
+<tr><td>Licenza JHorizon (&euro;1.000/mese x 12)</td><td style="text-align:right">&euro;12.000</td></tr>
+<tr><td>Produzione &amp; Manutenzione (&euro;2.500/mese x 12)</td><td style="text-align:right">&euro;30.000</td></tr>
+<tr class="total-row"><td><strong>TOTALE ANNO 1</strong></td><td style="text-align:right"><strong>&euro;47.000</strong></td></tr>
+</tbody></table>
+</div><div class="section" id="stream2">
+<div class="section-label">Stream 02</div>
+<h2>CRM Assessment &amp; Loyalty Foundation</h2>
+<h3>Contesto e Obiettivi</h3>
+<p>Il mercato energetico italiano sta vivendo una trasformazione profonda. Per Alperia, comprendere in profondit&agrave; il proprio customer base e costruire le basi per un programma di loyalty rappresenta un'opportunit&agrave; di consolidamento competitivo.</p>
+<div class="highlight-box"><p><strong>Obiettivi:</strong> Analizzare il CRM per comprendere customer personas, identificare driver di churn e leve di retention, mappare customer journey critici e definire le basi per un programma di Loyalty.</p></div>
+<h3>Metodologia: 5 Fasi Integrate</h3>
+<div class="phase-card"><span class="phase-badge">FASE 1 &mdash; Settimana 1-2</span><h4>Data Audit &amp; Quality Assessment</h4>
+<p>Mappatura fonti dati (CRM, billing, customer service, digital touchpoint, e-mobility app). Assessment qualit&agrave;, data gap, compliance GDPR.</p>
+<p><strong>Output:</strong> Data Quality Report con scoring e raccomandazioni.</p></div>
+<div class="phase-card"><span class="phase-badge">FASE 2 &mdash; Settimana 3-5</span><h4>Customer Segmentation &amp; Persona Building</h4>
+<p><strong>Metodologie:</strong> RFM Analysis, Clustering (K-Means, DBSCAN), CLV Modeling (BG/NBD, Gamma-Gamma), Behavioral Segmentation, 6-8 Personas data-driven.</p>
+<p><strong>Output:</strong> Customer Segmentation Framework con personas e CLV scoring.</p></div>
+<div class="phase-card"><span class="phase-badge">FASE 3 &mdash; Settimana 5-7</span><h4>Churn Analysis &amp; Predictive Modeling</h4>
+<p><strong>Metodologie:</strong> Survival Analysis (Kaplan-Meier, Cox), Churn Propensity (Gradient Boosting, Random Forest), SHAP Values, Churn Funnel, Win-Back Analysis.</p>
+<p><strong>Output:</strong> Churn Prediction Model con dashboard e early warning system.</p></div>
+<div class="phase-card"><span class="phase-badge">FASE 4 &mdash; Settimana 7-9</span><h4>Retention Mechanics &amp; Journey Mapping</h4>
+<p><strong>Journey:</strong> Onboarding (primi 90gg), Engagement (cross-sell/upsell), At-Risk, Win-Back. <strong>Mechanics:</strong> Reward, trigger-based communication, personalizzazione, community, referral.</p>
+<p><strong>Output:</strong> Journey Maps, Retention Playbook, Benchmark (Enel, E.ON, Vattenfall, Octopus Energy).</p></div>
+<div class="phase-card"><span class="phase-badge">FASE 5 &mdash; Settimana 9-12</span><h4>Loyalty Program Strategic Blueprint</h4>
+<p>Vision &amp; Positioning 100% green, Program Architecture (earn/burn, tier, partnership), Value Proposition per Persona, Technology Assessment, Business Case, Roadmap MVP &rarr; Scale &rarr; Optimize.</p>
+<p><strong>Output:</strong> Loyalty Program Strategic Blueprint Document.</p></div>
+<h3>Investment &mdash; Stream 2</h3>
+<table><thead><tr><th>Voce</th><th style="text-align:right">Importo</th></tr></thead>
+<tbody>
+<tr><td>CRM Assessment completo (Fase 1-4)</td><td style="text-align:right">&euro;20.000</td></tr>
+<tr><td>Loyalty Program Strategic Blueprint (Fase 5)</td><td style="text-align:right">&euro;10.000</td></tr>
+<tr class="total-row"><td><strong>TOTALE STREAM 2</strong></td><td style="text-align:right"><strong>&euro;30.000</strong></td></tr>
+</tbody></table>
+</div><div class="section" id="governance">
+<div class="section-label">Sezione 05</div>
+<h2>Team &amp; Governance</h2>
+<table><thead><tr><th>Ruolo</th><th>Responsabilit&agrave;</th></tr></thead>
+<tbody>
+<tr><td><strong>Sponsor JAKALA</strong></td><td>Partner responsabile, escalation, quality assurance</td></tr>
+<tr><td><strong>Project Manager JAKALA</strong></td><td>Coordinamento operativo, planning, reporting</td></tr>
+<tr><td><strong>Sponsor Alperia</strong></td><td>Decision making, accesso ai dati, approvazioni</td></tr>
+<tr><td><strong>Referente Marketing Alperia</strong></td><td>Coordinamento operativo lato cliente</td></tr>
+<tr><td><strong>Referente IT Alperia</strong></td><td>Supporto integrazioni tecniche (GSC, GA4, CRM)</td></tr>
+</tbody></table>
+<h3>Cadenza di Reporting</h3>
+<ul>
+<li><strong>Weekly stand-up</strong> (30 min) &mdash; Avanzamento, blocchi, priorit&agrave;</li>
+<li><strong>Monthly business review</strong> (1h) &mdash; KPI, risultati, next steps</li>
+<li><strong>Quarterly strategic review</strong> (2h) &mdash; Assessment, ricalibrazione strategia</li>
+</ul></div>
+<div class="section" id="investment">
+<div class="section-label">Sezione 06</div>
+<h2>Investment Summary</h2>
+<div class="investment-total"><div class="label">Investimento Totale Anno 1</div><div class="amount">&euro;77.000</div></div>
+<table><thead><tr><th>Stream</th><th>Descrizione</th><th style="text-align:right">Investimento</th></tr></thead>
+<tbody>
+<tr><td><strong>Stream 1</strong></td><td>JHorizon: AI Search Intelligence &amp; Activation (12 mesi)</td><td style="text-align:right">&euro;47.000</td></tr>
+<tr><td><strong>Stream 2</strong></td><td>CRM Assessment &amp; Loyalty Foundation (12 settimane)</td><td style="text-align:right">&euro;30.000</td></tr>
+<tr class="total-row"><td colspan="2"><strong>TOTALE</strong></td><td style="text-align:right"><strong>&euro;77.000</strong></td></tr>
+</tbody></table>
+<h3>Condizioni</h3>
+<ul>
+<li>Fatturazione: 30% all'avvio, 70% in rate mensili</li>
+<li>Durata: Stream 1 &mdash; 12 mesi; Stream 2 &mdash; 12 settimane</li>
+<li>Rinnovo Stream 1: proposta al mese 10</li>
+<li>Escluso media buying Digital PR e sviluppi tecnici su alperia.eu</li>
+</ul></div>
+<div class="section" id="jakala">
+<div class="section-label">Sezione 07</div>
+<h2>Perch&eacute; JAKALA</h2>
+<p>JAKALA &egrave; la pi&ugrave; grande martech company italiana e uno dei principali player europei nella data-driven transformation, con oltre 1.600 professionisti e fatturato superiore a &euro;500M.</p>
+<ul>
+<li><strong>Pionieri dell'AI Search Analytics</strong> &mdash; JHorizon, prima piattaforma italiana di AI Search Intelligence</li>
+<li><strong>Deep CRM &amp; Loyalty expertise</strong> &mdash; 20+ anni, competenze specifiche utilities</li>
+<li><strong>Approccio data-driven end-to-end</strong> &mdash; Data strategy, execution, team integrato</li>
+<li><strong>Propriet&agrave; intellettuale</strong> &mdash; AI Health Score, AI Traffic Contribution, reverse engineering dark traffic</li>
+<li><strong>Track record Energy &amp; Utilities</strong> &mdash; Esperienza consolidata settore energetico</li>
+</ul></div>
+</div>
+<div class="footer"><div class="brand">JAKALA</div>
+<p>Via Solferino, 37 &mdash; 20121 Milano &mdash; www.jakala.com</p>
+<p style="margin-top:8px;font-size:11px;color:#aaa;">&copy; 2026 JAKALA SpA &mdash; Tutti i diritti riservati. Documento confidenziale destinato esclusivamente ad Alperia SpA.</p>
+</div></div>
+<script>
+function checkPassword(){var p=document.getElementById('pwd-input').value;if(p==='Alperia2026'){document.getElementById('password-screen').classList.add('hidden');document.getElementById('content').classList.add('visible')}else{document.getElementById('pwd-error').style.display='block';document.getElementById('pwd-input').value='';document.getElementById('pwd-input').focus()}}
+</script>
+</body></html>
